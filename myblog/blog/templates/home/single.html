@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<!--[if lt IE 8 ]><html class="no-js ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="no-js ie ie8" lang="en"> <![endif]-->
+<!--[if IE 9 ]><html class="no-js ie ie9" lang="en"> <![endif]-->
+<!--[if (gte IE 8)|!(IE)]><!--><html class="no-js" lang="en"> <!--<![endif]-->
+{% include 'home/header.html' %}
+   <!-- Content
+   ================================================== -->
+   <div id="content-wrap">
+
+   	<div class="row">
+
+   		<div id="main" class="eight columns">
+
+   			<article class="entry">
+
+					<header class="entry-header">
+
+						<h2 class="entry-title">
+							{{post.title |safe}}
+						</h2>
+
+						<div class="entry-meta">
+							<ul>
+								<li>{{post.date_posted.strftime('%B %d, %Y,%X') }}</li>
+								<span class="meta-sep">&bull;</span>
+								<span class="meta-sep">&bull;</span>
+								<li><b>Posted By</b>  {{post.author}}</li>
+							</ul>
+						</div>
+
+					</header>
+
+					<div class="entry-content-media">
+						<div class="post-thumb">
+							<img src="{{post.image_url}}">
+						</div>
+					</div>
+
+					<div class="entry-content">
+						<p class="lead">{{post.content |safe}}</p>
+					</div>
+
+
+
+				</article>
+
+
+
+
+
+
+
+				<!-- Comments
+            ================================================== -->
+            {{comment_api.code|safe}}
+
+
+               </center>
+   			<div class="widget widget_categories group">
+   				<h3>Tutorials.</h3>
+   				{% for posts in poster %}
+          <ul>
+            <li><a href="{{ url_for('homepage.article', post_id=posts.id) }}" title="">{{posts.title |safe}}</a></li>
+          </ul>
+               {% endfor %}
+				</div>
+
+				<div class="widget widget_text group">
+				<SCRIPT data-cfasync="false" SRC="//bdv.bidvertiser.com/BidVertiser.dbm?pid=803768&bid=1959356" TYPE="text/javascript"></SCRIPT>
+
+   			</div>
+
+   			<div class="widget widget_tags">
+               <h3></h3>
+
+               <div class="tagcloud group">
+
+               <div class="tagcloud group">
+
+               </div>
+
+               </div>
+
+            </div>
+
+<iframe src="https://get.cryptobrowser.site/promo/ad/1/2046331/" style="width: 120px; height: 600px" frameborder="no"></iframe>
+
+   		</div> <!-- end sidebar -->
+
+  		</div> <!-- end row -->
+
+   </div> <!-- end content-wrap -->
+
+   <!-- Footer
+   ================================================== -->
+   {% include 'home/footer.html' %}
+
+</body>
+
+</html>

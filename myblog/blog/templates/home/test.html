@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<!--[if lt IE 8 ]><html class="no-js ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="no-js ie ie8" lang="en"> <![endif]-->
+<!--[if IE 9 ]><html class="no-js ie ie9" lang="en"> <![endif]-->
+<!--[if (gte IE 8)|!(IE)]><!--><html class="no-js" lang="en"> <!--<![endif]-->
+{% include 'home/header.html' %}
+
+   <!-- Content
+   ================================================== -->
+   <div id="content-wrap" class="pagination">
+
+   	<div class="row">
+
+   		<div id="main" class="eight columns">
+
+	   		<article class="entry">
+	   				{% for threadss in threads %}
+					<header class="entry-header">
+						
+						<h2 class="entry-title">
+							<a href="{{ url_for('homepage.post', post_id=threadss.id) }}" title="">{{threadss.title}}</a>
+						</h2> 				 
+					
+						<div class="entry-meta">
+							<ul>
+								<li>{{ threadss.date_posted.strftime('%B %d, %Y') }}</li>
+								<span class="meta-sep">&bull;</span>								
+								
+								<span class="meta-sep">&bull;</span>
+								<li>{{threadss.author}}</li>
+							</ul>
+						</div> 
+					 
+					</header> 
+					
+					<div id="content" class="entry-content">
+						<p>{{threadss.subtitle}}</p>
+                  <img src="{{threadss.image_url}}">
+					</div> 
+					{% endfor %}
+
+				</article> <!-- end entry -->
+
+            <div>
+               {% for page in threads %}
+                  {% if page %}
+                  <a href="{{url_for('homepage.page',post_id=page)}}">{{page}}</a>
+                  {% else %}
+                     ...
+                  {% endif %}
+               {% endfor %}
+               
+               
+            </div>
+				
+						
+
+   		</div> <!-- end main -->
+
+   		<div id="sidebar" class="four columns">
+
+   			<div class="widget widget_search">
+                  <h3>Search</h3> 
+                  <form action="search" method="GET">
+
+                     <input type="text" value="Search here..." onblur="if(this.value == '') { this.value = 'Search here...'; }" onfocus="if (this.value == 'Search here...') { this.value = ''; }" class="text-search">
+                     <input type="submit" value="" class="submit-search">
+
+                  </form>
+               </div>
+
+   			<div class="widget widget_categories group">
+   				<h3>Tutorials</h3> 
+               {% for posts in threads %}
+   				<ul>
+						<li><a href="#" title="">{{posts.title}}</a> ({{posts.total_read}})</li>						
+					</ul>
+               {% endfor %}
+				</div>
+
+
+
+
+				<div class="widget widget_text group">
+					<h3>Widget Text.</h3>
+
+   				<p>Lorem ipsum Ullamco commodo laboris sit dolore commodo aliquip incididunt fugiat esse dolor aute fugiat minim eiusmod do velit labore fugiat officia ad sit culpa labore in consectetur sint cillum sint consectetur voluptate adipisicing Duis irure magna ut sit amet reprehenderit.</p>
+
+   			</div>
+
+   			<div class="widget widget_tags">
+               <h3>Post Tags.</h3>
+               {% for page in threads %}
+               <div class="tagcloud group">
+                	<a href="#">{{page.title}}</a>
+               </div>
+               {% endfor %}
+            </div>
+
+            <div class="widget widget_popular">
+               <h3>Popular Post.</h3>
+
+               <ul class="link-list">
+                  <li><a href="#">Sint cillum consectetur voluptate.</a></li>
+                  <li><a href="#">Lorem ipsum Ullamco commodo.</a></li>
+                  <li><a href="#">Fugiat minim eiusmod do.</a></li>                     
+               </ul>
+                  
+            </div>
+   			
+   		</div> <!-- end sidebar -->
+
+   	</div> <!-- end row -->
+
+   </div> <!-- end content-wrap -->
+   
+
+   <!-- Footer
+   ================================================== -->
+   {% include 'home/footer.html' %}
+
+   
+
+</body>
+
+</html>

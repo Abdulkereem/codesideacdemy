@@ -1,0 +1,114 @@
+<head>
+
+   <!--- Basic Page Needs
+   ================================================== -->
+   <meta charset="utf-8">
+	<title>{{config.blogname}}.</title>
+	<meta name="description" content="">
+	<meta name="author" content="">
+
+	<!-- mobile specific metas
+   ================================================== -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+   <!-- CSS
+    ================================================== -->
+   <link rel="stylesheet" href="{{ url_for('static', filename='home/css/default.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='home/css/layout.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='home/css/media-queries.css') }}">
+	<script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+
+   <!-- Script
+   ================================================== -->
+	<script src="{{ url_for('static', filename='home/js/modernizr.js') }}"></script>
+	<script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?lang=css&amp;skin=sunburst"></script>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js" type="text/javascript"></script>
+	<meta name="google-site-verification" content="Dn3ajYqqUa6fRZHImT_0D5hG4p_stJjkw2j75Qu96VA" />
+
+   <!-- Favicons
+	================================================== -->
+	<link rel="shortcut icon" href="{{ url_for('static', filename='home/images/CodeSide Logo fb.jpg') }}" >
+
+    <meta name="google-site-verification" content="ny4FxJ4ww9OdbDu23WiLrUwW05y5StPdE7ONvBIf2xA" />
+
+
+</head>
+
+<body>
+
+   <!-- Header
+   ================================================== -->
+   <header id="top">
+
+   	<div class="row">
+
+   		<div class="header-content twelve columns">
+
+		      <h1 id="logo-text"><a href="#" title="">{{config.blogname}}</a></h1>
+				<p id="intro">{{config.slogan}}</p>
+
+			</div>
+
+	   </div>
+
+	   <nav id="nav-wrap">
+	   	{% if current_user.is_authenticated %}
+	   	   	<a class="mobile-btn" href="{{ url_for('homepage.golive') }}" title="Show navigation">LiVE streaming class</a>
+	   		   <a class="mobile-btn" href="#" title="Hide navigation">Hide Menu</a>
+
+	   	   	<div class="row">
+
+	   			   	<ul id="nav" class="nav">
+	   			      	<li class="current"><a href="{{ url_for('homepage.index') }}">Home</a></li>
+
+	   			      	<li class="has-children"><a href="#">{{current_user.username}}</a>
+	   	                  <ul>
+	   	                  	<li><a href="{{url_for('login.logout')}}" >Logout</a></li>
+	   	                  </ul>
+	   	               </li>
+	   	               <li><a href="{{ url_for('homepage.golive') }}">Live Class</a></li>
+	   	               <li><a href="{{config.myurl}}">About me</a></li>
+
+	   			   	</ul>
+
+	   	{% else %}
+	   	<a class="mobile-btn" href="{{ url_for('homepage.golive') }}" title="Show navigation">LiVE streaming class</a>
+		   <a class="mobile-btn" href="#" title="Hide navigation">Hide Menu</a>
+
+	   	<div class="row">
+
+			   	<ul id="nav" class="nav">
+			      	<li class="current"><a href="{{ url_for('homepage.index') }}">Home</a></li>
+
+			      	<li class="has-children"><a href="#">Account</a>
+	                  <ul>
+	                     <li><a onclick="document.getElementById('modal-wrapper').style.display='block'"href="#" >Create Account</a></li>
+	                     <li><a onclick="document.getElementById('login').style.display='block'" href="#">Login</a></li>
+	                  </ul>
+	               </li>
+	               <li><a href="{{ url_for('homepage.golive') }}">Live Class</a></li>
+	               <li><a href="">About me</a></li>
+
+			   	</ul> <!-- end #nav -->
+
+	   	</div>
+	   	{% endif %}
+	   </nav> <!-- end #nav-wrap -->
+
+   </header> <!-- Header End -->
+   {% include './home/pop_up/index.html' %}
+   {% include './home/pop_up/login.html' %}
+   <div>
+
+   	{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <script>
+      var messages = {{ messages | safe }};
+      for (var i=0; i<messages.length; i++) {
+        alert(messages[i]);
+      }
+    </script>
+  {% endif %}
+{% endwith %}
+   </div>
